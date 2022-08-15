@@ -7,12 +7,13 @@ const productRoutes = require("./routes/product");
 const app = express();
 const dotenv = require('dotenv');
 
-dotenv.config();
+
 
 //[SECTION] Database Connection
+dotenv.config();
 const secret = process.env.CONNECTION_STRING;
 mongoose.connect(
-    secret,{
+    secret, {
         useNewUrlParser: true,
         useUnifiedTopology: true
 });
