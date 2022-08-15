@@ -2,11 +2,10 @@ const Product = require("../models/Product")
 const bcrypt = require("bcrypt");
 const auth = require("../auth");
 
-module.exports.addBook = (data) => { 
+module.exports.addProduct = (data) => { 
     if(data.isAdmin){
         let newProduct = new Product({
-            title : data.product.title,
-            author : data.product.author,
+            name : data.product.name,
             image: data.product.image,
             description : data.product.description,
             price : data.product.price,
@@ -27,13 +26,13 @@ module.exports.addBook = (data) => {
     }
 }
 
-module.exports.getActiveBooks = () => {
+module.exports.getActiveProducts = () => {
     return Product.find({isActive : true}).then(result => {
         return result
     })
 }
 
-module.exports.getAllBooks = (data) => {
+module.exports.getAllProducts = (data) => {
     if(data.isAdmin){
         return Product.find({}).then(result => {
             return result
@@ -45,24 +44,23 @@ module.exports.getAllBooks = (data) => {
     
 }
 
-module.exports.getBook = (reqParams) => {
-    return Product.findById(reqParams.bookId).then(result => {
+module.exports.getProduct = (reqParams) => {
+    return Product.findById(reqParams.productId).then(result => {
         return result
     })
 }
 
-module.exports.updateBook = (data) => {
+module.exports.updateProduct = (data) => {
     if(data.isAdmin){
         let updatedProduct = {
-            title : data.product.title,
-            author : data.product.author,
+            name : data.product.name,
             image : data.product.image,
             description : data.product.description,
             price : data.product.price,
             stock: data.product.stock
         }
 
-        return Product.findByIdAndUpdate(data.bookId, updatedProduct).then((product, error) => {
+        return Product.findByIdAndUpdate(data.productId, updatedProduct).then((product, error) => {
             if(error){
                 return false
             }
@@ -76,13 +74,13 @@ module.exports.updateBook = (data) => {
     }
 }
 
-module.exports.archiveBook = (data) => {
+module.exports.archiveProduct = (data) => {
     if (data.isAdmin) {
         let updateActiveField = {
             isActive : false
         };
 
-        return Product.findByIdAndUpdate(data.bookId, updateActiveField).then((product, error) => {
+        return Product.findByIdAndUpdate(data.productId, updateActiveField).then((product, error) => {
             if (error) {
                 return false;
             } 
@@ -100,13 +98,13 @@ module.exports.archiveBook = (data) => {
 
 }
 
-module.exports.activateBook = (data) => {
+module.exports.activateProduct = (data) => {
     if (data.isAdmin) {
         let updateActiveField = {
             isActive : true
         };
 
-        return Product.findByIdAndUpdate(data.bookId, updateActiveField).then((product, error) => {
+        return Product.findByIdAndUpdate(data.productId, updateActiveField).then((product, error) => {
             if (error) {
                 return false;
             } 
@@ -124,9 +122,9 @@ module.exports.activateBook = (data) => {
 
 }
 
-module.exports.deleteBook = (data) => {
+module.exports.deleteProduct = (data) => {
     if (data.isAdmin) {
-        return Product.findByIdAndDelete(data.bookId).then((product, error) => {
+        return Product.findByIdAndDelete(data.productId).then((product, error) => {
             if (error) {
                 return false;
             } 

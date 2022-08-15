@@ -4,61 +4,61 @@ const productController = require("../controllers/product");
 const auth = require("../auth");
 const { trusted } = require("mongoose");
 
-router.post("/addBook", auth.verify, (req, res) => {
+router.post("/addProduct", auth.verify, (req, res) => {
     const data = {
         product : req.body,
         isAdmin : auth.decode(req.headers.authorization).isAdmin
     }
 
-    productController.addBook(data).then(resultFromController => res.send(resultFromController))
+    productController.addProduct(data).then(resultFromController => res.send(resultFromController))
 })
 
 router.get("/", (req, res) => {
-    productController.getActiveBooks().then(resultFromController => res.send(resultFromController))
+    productController.getActiveProducts().then(resultFromController => res.send(resultFromController))
 })
 
 router.get("/all", auth.verify, (req, res) => {
     const data = {
         isAdmin : auth.decode(req.headers.authorization).isAdmin
     }
-    productController.getAllBooks(data).then(resultFromController => res.send(resultFromController))
+    productController.getAllProducts(data).then(resultFromController => res.send(resultFromController))
 })
 
-router.get("/:bookId", (req, res) => {
-    productController.getBook(req.params).then(resultFromController => res.send(resultFromController))
+router.get("/:productId", (req, res) => {
+    productController.getProduct(req.params).then(resultFromController => res.send(resultFromController))
 })
 
-router.put("/:bookId/update", auth.verify, (req, res) =>{
+router.put("/:productId/update", auth.verify, (req, res) =>{
     const data = {
         product : req.body,
-        bookId : req.params.bookId,
+        productId : req.params.productId,
         isAdmin : auth.decode(req.headers.authorization).isAdmin    
     }
-    productController.updateBook(data).then(resultFromController => res.send(resultFromController))
+    productController.updateProduct(data).then(resultFromController => res.send(resultFromController))
 });
 
-router.put("/:bookId/archive", auth.verify, (req, res) => {
+router.put("/:productId/archive", auth.verify, (req, res) => {
     const data = {
-        bookId : req.params.bookId,
+        productId : req.params.productId,
         isAdmin : auth.decode(req.headers.authorization).isAdmin    
     }
-	productController.archiveBook(data).then(resultFromController => res.send(resultFromController));
+	productController.archiveProduct(data).then(resultFromController => res.send(resultFromController));
 });
 
-router.put("/:bookId/activate", auth.verify, (req, res) => {
+router.put("/:productId/activate", auth.verify, (req, res) => {
     const data = {
-        bookId : req.params.bookId,
+        bookId : req.params.ProductId,
         isAdmin : auth.decode(req.headers.authorization).isAdmin    
     }
-	productController.activateBook(data).then(resultFromController => res.send(resultFromController));
+	productController.activateProduct(data).then(resultFromController => res.send(resultFromController));
 });
 
-router.delete("/:bookId/delete", auth.verify, (req, res) => {
+router.delete("/:productId/delete", auth.verify, (req, res) => {
     const data = {
-        bookId : req.params.bookId,
+        productId : req.params.productId,
         isAdmin : auth.decode(req.headers.authorization).isAdmin    
     }
-	productController.deleteBook(data).then(resultFromController => res.send(resultFromController));
+	productController.deleteProduct(data).then(resultFromController => res.send(resultFromController));
 });
 
 

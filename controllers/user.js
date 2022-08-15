@@ -100,7 +100,7 @@ module.exports.createOrder = async(data, admin) => {
                     userId: data.userId,
                     email: data.email,
                     productId: data.productId,
-                    title: data.title,
+                    name: data.name,
                     purchasedOn: new Date(),
                     quantity: data.quantity,
                     totalAmount: product.price * data.quantity,

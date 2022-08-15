@@ -11,11 +11,11 @@ const orderSchema = new mongoose.Schema({
     },
     productId : {
         type : String,
-        required : [true, "Book ID is required."]
+        required : [true, "Product ID ID is required."]
     },
-    title : {
+    name : {
         type : String,
-        required : [true, "Book title is required."]
+        required : [true, "Product Name is required."]
     },
     purchasedOn : {
         type : Date,
