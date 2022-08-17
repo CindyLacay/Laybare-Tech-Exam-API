@@ -12,7 +12,7 @@ const dotenv = require('dotenv');
 //[SECTION] Database Connection
 dotenv.config();
 const secret = process.env.CONNECTION_STRING;
-mongoose.connect("mongodb+srv://admin:admin@wdc028-course-booking.55eun.mongodb.net/csp2-ecommerce?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://admin:admin@wdc028-course-booking.55eun.mongodb.net/laybare-backend?retryWrites=true&w=majority", {
         useNewUrlParser: true,
         useUnifiedTopology: true
 });
